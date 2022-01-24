@@ -21,12 +21,13 @@ module userAssignedIdentity 'managedIdentity/userAssignedIdentities.bicep' = {
 module appRoleAssignment 'authorization/appRoleAssignments.bicep' = {
   name: 'appRoleAssignment'
   scope: resourceGroup(_subscription, _appResourceGroupName)
+  // since the module is going to be scoped to this resource group, we don't need the "sub" and "appResourceGroupName" params
   params: {
-    sub: _subscription
+    // sub: _subscription
     userId: userAssignedIdentity.outputs.id
     userName: userAssignedIdentity.outputs.name
     appName: _appName
-    appResourceGroupName: _appResourceGroupName
+    // appResourceGroupName: _appResourceGroupName
     crossTenantRoleAssignment: crossTenantRoleAssignment
     principalId: userAssignedIdentity.outputs.principalId
     appRoleDefinitionId: appRoleDefinitionId
